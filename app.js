@@ -33,7 +33,7 @@ recognition.addEventListener("result", (e) => {
   }
   //녹음을 마쳤을때 호출
   recognition.addEventListener("soundend", () => {
-    mic.style.backgroundColor = null;
+    SetMicoff(false);
   });
 
   document.querySelector(".para").innerHTML = speechToText + interimTranscript;
@@ -42,14 +42,27 @@ recognition.addEventListener("result", (e) => {
 //마이크 클릭시 호출
 mic.addEventListener("click", () => {
   if (isRecord == false) {
+    SetMicoff(isRecord);
+  } else {
+    SetMicoff(isRecord);
+  }
+});
+
+const SetMicoff = (bflag) => {
+  if (bflag == false) {
     console.log("마이크켜짐");
     recognition.start();
-    isRecord = true;
     mic.style.backgroundColor = "#6BD6E1";
+    isRecord = true;
   } else {
     console.log("마이크꺼짐");
     recognition.stop();
-    isRecord = false;
     mic.style.backgroundColor = null;
+    isRecord = false;
   }
+};
+
+recognition.addEventListener("end", (e) => {
+  alert("음성인식 서비스 연결이 해제되었습니다.");
+  SetMicoff(true);
 });
