@@ -17,12 +17,11 @@ let words = document.querySelector(".words");
 words.appendChild(p);
 
 let mic = document.querySelector("#circlein"); //마이크 버튼
-let speechToText = "";
 
 recognition.addEventListener("result", (e) => {
+  let speechToText = "";
   let interimTranscript = "";
-  let len = e.results.length;
-  for (let i = e.resultIndex; i < len; i++) {
+  for (let i = e.resultIndex; i < e.results.length; i++) {
     let transcript = e.results[i][0].transcript; //인식된 단어(String) 값을 저장
     //만약 끝이 나면 이어 붙이기
     if (e.results[i].isFinal) {
@@ -32,15 +31,17 @@ recognition.addEventListener("result", (e) => {
     }
   }
   //녹음을 마쳤을때 호출
-  recognition.addEventListener("soundend", () => {
-    SetMicoff(false);
-  });
-
+  // recognition.addEventListener("soundend", () => {});
   document.querySelector(".para").innerHTML = speechToText + interimTranscript;
 });
 
 //마이크 클릭시 호출
 mic.addEventListener("click", () => {
+  let Soundresult = document.querySelector(".para").innerHTML;
+  // console.log(Soundresult);
+  if (Soundresult != "") {
+    document.querySelector(".para").innerHTML = "";
+  }
   if (isRecord == false) {
     SetMicoff(isRecord);
   } else {
@@ -65,6 +66,5 @@ const SetMicoff = (bflag) => {
 };
 
 recognition.addEventListener("end", (e) => {
-  alert("음성인식 서비스 연결이 해제되었습니다.");
   SetMicoff(true);
 });
