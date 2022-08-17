@@ -4,7 +4,7 @@ window.SpeechRecognition =
 const recognition = new SpeechRecognition();
 
 recognition.interimResults = true; //아직 인식이 완료되지 않은 중간 결과 값
-recognition.lang = "ko-KR"; //언어
+recognition.lang = "ko-KR"; //언어( 기본값은 en-US )
 
 let isRecord = false; //녹음 여부 변수
 
