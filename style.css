@@ -1,10 +1,15 @@
 body {
   background-color: black;
   padding: 15px;
-  font-family: cursive;
   color: white;
   font-size: 30px;
 }
+
+.description {
+  text-align: center;
+  color: white;
+}
+
 #circlein {
   width: 70px;
   height: 70px;
