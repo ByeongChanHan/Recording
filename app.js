@@ -48,6 +48,7 @@ mic.addEventListener("click", () => {
   }
 });
 
+// 마이크 셋팅함수
 const SetMicoff = (bflag) => {
   if (bflag == false) {
     console.log("마이크켜짐");
