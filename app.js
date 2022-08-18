@@ -2,6 +2,7 @@ window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new SpeechRecognition();
+var msg = new SpeechSynthesisUtterance();
 
 recognition.interimResults = true; //음성인식이 끝나지 않아도 말하는 도중에 계속해서 스크립트가 작성된다
 recognition.lang = "ko-KR"; //언어( 기본값은 en-US )
@@ -33,6 +34,8 @@ recognition.addEventListener("result", (e) => {
   //녹음을 마쳤을때 호출
   // recognition.addEventListener("soundend", () => {});
   document.querySelector(".para").innerHTML = speechToText + interimTranscript;
+  msg.text = speechToText + interimTranscript;
+  window.speechSynthesis.speak(msg);
 });
 
 //마이크 클릭시 호출
@@ -62,6 +65,7 @@ const SetMicoff = (bflag) => {
     recognition.stop();
     mic.style.backgroundColor = null;
     isRecord = false;
+    msg.text = "";
   }
 };
 
